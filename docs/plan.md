@@ -2,7 +2,7 @@
 
 ## Overall Progress
 
-- [ ] Phase 1: Project Setup
+- [x] Phase 1: Project Setup
 - [ ] Phase 2: Configuration
 - [ ] Phase 3: Schema Mapping
 - [ ] Phase 4: Iceberg Write Layer
@@ -17,28 +17,28 @@
 
 ## Phase 1: Project Setup
 
-- [ ] Initialize Maven project
-  - [ ] Create `pom.xml` with Java 25 compiler settings (maven-compiler-plugin)
-  - [ ] Configure maven-shade-plugin or maven-assembly-plugin for fat JAR
-- [ ] Add core dependencies
-  - [ ] Apache Iceberg (iceberg-core, iceberg-parquet, iceberg-aws)
-  - [ ] AWS S3 Tables (s3-tables-catalog-for-iceberg, software.amazon.awssdk:s3tables)
-  - [ ] MongoDB Java Driver (mongodb-driver-sync 5.x)
-  - [ ] Parquet (parquet-avro)
-  - [ ] Hadoop common (for local HadoopCatalog)
-  - [ ] PicoCLI for CLI parsing
-  - [ ] Jackson for YAML/JSON configuration
-  - [ ] SLF4J + Logback for logging
-  - [ ] Micrometer for metrics
-- [ ] Add test dependencies
-  - [ ] JUnit 5
-  - [ ] Testcontainers (mongodb, localstack)
-  - [ ] AssertJ
-- [ ] Create base package structure (`com.luketn.mongodb.iceberg.sync`)
-- [ ] Create `SyncDaemon.java` main class (skeleton with PicoCLI)
-- [ ] Create `logback.xml` with sensible defaults
-- [ ] Create `reference-config.yaml` with documented examples (local, S3 Tables, REST)
-- [ ] Verify project compiles and runs an empty main method
+- [x] Initialize Maven project
+  - [x] Create `pom.xml` with Java 25 compiler settings (maven-compiler-plugin)
+  - [x] Configure maven-shade-plugin or maven-assembly-plugin for fat JAR
+- [x] Add core dependencies
+  - [x] Apache Iceberg (iceberg-core, iceberg-parquet, iceberg-aws)
+  - [x] AWS S3 Tables (s3-tables-catalog-for-iceberg, software.amazon.awssdk:s3tables)
+  - [x] MongoDB Java Driver (mongodb-driver-sync 5.x)
+  - [x] Parquet (parquet-avro)
+  - [x] Hadoop common (for local HadoopCatalog)
+  - [x] PicoCLI for CLI parsing
+  - [x] Jackson for YAML/JSON configuration
+  - [x] SLF4J + Logback for logging
+  - [x] Micrometer for metrics
+- [x] Add test dependencies
+  - [x] JUnit 5
+  - [x] Testcontainers (mongodb, localstack)
+  - [x] AssertJ
+- [x] Create base package structure (`com.luketn.mongodb.iceberg.sync`)
+- [x] Create `SyncDaemon.java` main class (skeleton with PicoCLI)
+- [x] Create `logback.xml` with sensible defaults
+- [x] Create `reference-config.yaml` with documented examples (local, S3 Tables, REST)
+- [x] Verify project compiles and runs an empty main method
 
 ## Phase 2: Configuration
 

@@ -30,7 +30,7 @@
 
         <!-- Test dependencies -->
         <junit.version>5.12.1</junit.version>
-        <testcontainers.version>2.0.3</testcontainers.version>
+        <testcontainers.version>1.20.6</testcontainers.version>
         <assertj.version>3.27.7</assertj.version>
     </properties>
 
@@ -67,6 +67,13 @@
             <groupId>org.apache.iceberg</groupId>
             <artifactId>iceberg-data</artifactId>
             <version>${iceberg.version}</version>
+        </dependency>
+
+        <!-- Parquet -->
+        <dependency>
+            <groupId>org.apache.parquet</groupId>
+            <artifactId>parquet-avro</artifactId>
+            <version>1.16.0</version>
         </dependency>
 
         <!-- AWS S3 Tables -->
@@ -109,6 +116,14 @@
                 <exclusion>
                     <groupId>org.apache.kerby</groupId>
                     <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-reload4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ch.qos.reload4j</groupId>
+                    <artifactId>reload4j</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
