@@ -1,0 +1,107 @@
+# =============================================================================
+# mongodb-iceberg-sync: Reference Configuration
+# =============================================================================
+# Copy this file and modify for your environment.
+# Environment variables can be referenced as ${ENV_VAR_NAME}.
+
+# -----------------------------------------------------------------------------
+# MongoDB Connection
+# -----------------------------------------------------------------------------
+mongodb:
+  # MongoDB connection URI
+  uri: "mongodb://localhost:27017"
+  # Database to sync from
+  database: "mydb"
+
+# -----------------------------------------------------------------------------
+# Iceberg Catalog Configuration
+# -----------------------------------------------------------------------------
+# Supported catalog types: local, s3tables, rest
+#
+# Choose ONE of the following catalog configurations:
+
+# --- Option 1: Local Iceberg Files (HadoopCatalog) --------------------------
+# Best for development and testing. Stores Iceberg tables on local filesystem.
+iceberg:
+  catalog:
+    type: "local"
+    warehouse: "/data/iceberg/warehouse"
+
+# --- Option 2: AWS S3 Tables ------------------------------------------------
+# Managed Apache Iceberg on AWS. Automatic compaction and maintenance.
+# iceberg:
+#   catalog:
+#     type: "s3tables"
+#     warehouse: "arn:aws:s3tables:us-east-1:123456789012:bucket/my-table-bucket"
+#   properties:
+#     client.region: "us-east-1"
+
+# --- Option 3: REST Catalog -------------------------------------------------
+# Compatible with any Iceberg REST catalog (Tabular, Polaris, etc.).
+# iceberg:
+#   catalog:
+#     type: "rest"
+#     uri: "http://localhost:8181"
+#     warehouse: "s3://my-bucket/warehouse"
+#   properties:
+#     s3.access-key-id: "${AWS_ACCESS_KEY_ID}"
+#     s3.secret-access-key: "${AWS_SECRET_ACCESS_KEY}"
+
+# -----------------------------------------------------------------------------
+# Collection Sync Definitions
+# -----------------------------------------------------------------------------
+sync:
+  collections:
+    # Each entry defines a MongoDB collection → Iceberg table mapping.
+
+    - source:
+        collection: "orders"
+      target:
+        namespace: "analytics"
+        table: "orders"
+
+      # Mapping mode: "auto" or "explicit"
+      #   auto     - all fields mapped with automatic type inference
+      #   explicit - only listed fields are mapped
+      mapping:
+        mode: "auto"
+
+        # Field mappings (only used when mode is "explicit"):
+        # fields:
+        #   - source: "_id"            # MongoDB field path (dot notation for nested)
+        #     target: "id"             # Iceberg column name
+        #     type: "string"           # Iceberg type override
+        #   - source: "orderDate"
+        #     target: "order_date"
+        #     type: "timestamp"
+        #   - source: "customer.name"
+        #     target: "customer_name"
+        #     type: "string"
+        #   - source: "items"
+        #     target: "items"
+        #     type: "list"
+        #   - source: "total"
+        #     target: "total"
+        #     type: "decimal"
+
+      # Iceberg table partitioning.
+      # Transforms: identity, year, month, day, hour, bucket[N]
+      partitioning:
+        - field: "order_date"
+          transform: "month"
+
+      # Batching controls (to avoid Iceberg small-file problem).
+      # A flush is triggered when ANY threshold is reached.
+      batch:
+        maxRecords: 50000           # Max records before flush (default: 50000)
+        maxBytes: 134217728         # Max buffer bytes before flush (default: 128 MB)
+        flushIntervalSeconds: 60    # Max seconds between flushes (default: 60)
+
+    # Additional collection mappings:
+    # - source:
+    #     collection: "products"
+    #   target:
+    #     namespace: "analytics"
+    #     table: "products"
+    #   mapping:
+    #     mode: "auto"

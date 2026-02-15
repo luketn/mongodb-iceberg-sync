@@ -1,0 +1,18 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.luketn.mongodb.iceberg.sync" level="DEBUG"/>
+
+    <!-- Suppress noisy Hadoop/Iceberg loggers -->
+    <logger name="org.apache.hadoop" level="WARN"/>
+    <logger name="org.apache.iceberg" level="INFO"/>
+    <logger name="org.apache.parquet" level="WARN"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
