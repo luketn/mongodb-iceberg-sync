@@ -1,5 +1,8 @@
 package com.luketn.mongodb.iceberg.sync;
 
+import com.luketn.mongodb.iceberg.sync.config.ConfigLoader;
+import com.luketn.mongodb.iceberg.sync.config.SyncConfig;
+import com.luketn.mongodb.iceberg.sync.config.SyncConfigException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
@@ -32,7 +35,16 @@ public class SyncDaemon implements Callable<Integer> {
     public Integer call() {
         logger.info("mongodb-iceberg-sync starting with config: {}", configFile);
 
-        // TODO: Load configuration from configFile
+        SyncConfig config;
+        try {
+            config = new ConfigLoader().load(configFile);
+        } catch (SyncConfigException e) {
+            logger.error("failed to load configuration: {}", e.getMessage());
+            return 1;
+        }
+
+        logger.info("loaded {} collection sync configuration(s)", config.sync().collections().size());
+
         // TODO: Initialize Iceberg catalog via CatalogFactory
         // TODO: Initialize MongoDB client
         // TODO: Create and start SyncManager

@@ -3,7 +3,7 @@
 ## Overall Progress
 
 - [x] Phase 1: Project Setup
-- [ ] Phase 2: Configuration
+- [x] Phase 2: Configuration
 - [ ] Phase 3: Schema Mapping
 - [ ] Phase 4: Iceberg Write Layer
 - [ ] Phase 5: Checkpoint Management
@@ -42,24 +42,24 @@
 
 ## Phase 2: Configuration
 
-- [ ] Define configuration data model
-  - [ ] `SyncConfig` (top-level)
-  - [ ] `MongoConfig` (URI, database)
-  - [ ] `IcebergConfig` (catalog type, URI, warehouse, properties)
-  - [ ] `CollectionSyncConfig` (source, target, mapping, partitioning, batch)
-  - [ ] `MappingConfig` (mode, field list)
-  - [ ] `FieldMapping` (source path, target name, type override)
-  - [ ] `PartitionConfig` (field, transform)
-  - [ ] `BatchConfig` (maxRecords, maxBytes, flushIntervalSeconds)
-- [ ] Implement YAML configuration loader using Jackson
-  - [ ] Environment variable substitution in config values
-  - [ ] Validation of required fields
-  - [ ] Sensible defaults for optional fields
-- [ ] Write unit tests for configuration parsing
-  - [ ] Valid config loads correctly
-  - [ ] Missing required fields produce clear errors
-  - [ ] Defaults applied for optional fields
-  - [ ] Environment variable substitution works
+- [x] Define configuration data model
+  - [x] `SyncConfig` (top-level)
+  - [x] `MongoConfig` (URI, database)
+  - [x] `IcebergConfig` (catalog type, URI, warehouse, properties)
+  - [x] `CollectionSyncConfig` (source, target, mapping, partitioning, batch)
+  - [x] `MappingConfig` (mode, field list)
+  - [x] `FieldMapping` (source path, target name, type override)
+  - [x] `PartitionConfig` (field, transform)
+  - [x] `BatchConfig` (maxRecords, maxBytes, flushIntervalSeconds)
+- [x] Implement YAML configuration loader using Jackson
+  - [x] Environment variable substitution in config values
+  - [x] Validation of required fields
+  - [x] Sensible defaults for optional fields
+- [x] Write unit tests for configuration parsing
+  - [x] Valid config loads correctly
+  - [x] Missing required fields produce clear errors
+  - [x] Defaults applied for optional fields
+  - [x] Environment variable substitution works
 
 ## Phase 3: Schema Mapping
 
